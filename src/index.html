@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <link rel="icon" type="image/x-icon" href="">
 </head>
 <body>
     <div class="container">
@@ -14,26 +15,33 @@
         <div class="main-info">
             <div class="city">Kilcormac</div>
             <div class="date">Sat 21st Aug</div>
-            <div class="weather-img">
-                <img alt="">
+            <div class="status">31C</div>
+            <div class="img-and-temp">
+                <div class="weather-img">
+                    <img alt="">
+                </div>
+                <div class="temperature">31C</div>
             </div>
-            <div class="temperature">31C</div>
             <div class="stats">
                 <div class="stat-box">
                     <p>Feels like</p>
-                    <img src="" alt="">
+                    <img id="feels-like-img" src="" alt="">
+                    <p id="feels-like"></p>
                 </div>
                 <div class="stat-box">
                     <p>Rain</p>
-                    <img src="" alt="">
+                    <img id="chance-of-rain-img" src="" alt="">
+                    <p id="rain"></p>
                 </div>
                 <div class="stat-box">
                     <p>Humidity</p>
-                    <img src="" alt="">
+                    <img id="humidity-img" src="" alt="">
+                    <p id="humidity"></p>
                 </div>
                 <div class="stat-box">
                     <p>Wind</p>
-                    <img src="" alt="">
+                    <img id="wind-img" src="" alt="">
+                    <p id="wind"></p>
                 </div>
             </div>
         </div>
@@ -45,7 +53,7 @@
             <div class="hourly-forecast">
                 <div class="hour" id="hour-1">
                     <div class="hour__time">2am</div>
-                    <img src="" alt="">
+                    <img src="" alt=""></img>
                     <div class="hour_temperature">13'C</div>
                 </div>
                 <div class="hour" id="hour-2">
