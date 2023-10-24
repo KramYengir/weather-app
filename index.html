@@ -7,7 +7,7 @@
     <link rel="icon" type="image/x-icon" href="">
 <script defer src="bundle.js"></script></head>
 <body>
-    <div class="container">
+    <div class="container celsius mph">
         <div class="search-box">
             <input type="text" placeholder="Search City...">
             <button></button>
@@ -26,23 +26,33 @@
                 <div class="stat-box">
                     <p>Feels like</p>
                     <img id="feels-like-img" src="" alt="">
-                    <p id="feels-like"></p>
+                    <div id="feels-like"></div>
                 </div>
                 <div class="stat-box">
                     <p>Rain</p>
                     <img id="chance-of-rain-img" src="" alt="">
-                    <p id="rain"></p>
+                    <div id="rain"></div>
                 </div>
                 <div class="stat-box">
                     <p>Humidity</p>
                     <img id="humidity-img" src="" alt="">
-                    <p id="humidity"></p>
+                    <div id="humidity"></div>
                 </div>
                 <div class="stat-box">
                     <p>Wind</p>
                     <img id="wind-img" src="" alt="">
-                    <p id="wind"></p>
+                    <div id="wind"></div>
                 </div>
+            </div>
+        </div>
+        <div class="options">
+            <div class="temp-btns">
+                <button class="selected" id="c-btn">°C</button>
+                <button id="f-btn">°F</button>
+            </div>
+            <div class="wind-btns">
+                <button class="selected" id="mph-btn">MPH</button>
+                <button id="km-btn">KPH</button>
             </div>
         </div>
         <div class="forecast">
@@ -54,31 +64,37 @@
                 <div class="hour" id="hour-1">
                     <div class="hour__time">2am</div>
                     <img src="" alt=""></img>
-                    <div class="hour_temperature">13'C</div>
+                    <div class="hour__status"></div>
+                    <div class="hour__temperature">13'C</div>
                 </div>
                 <div class="hour" id="hour-2">
                     <div class="hour__time">2am</div>
                     <img src="" alt="">
-                    <div class="hour_temperature">13'C</div>
+                    <div class="hour__status"></div>
+                    <div class="hour__temperature">13'C</div>
                 </div>
                 <div class="hour" id="hour-3">
                     <div class="hour__time">2am</div>
                     <img src="" alt="">
-                    <div class="hour_temperature">13'C</div>
+                    <div class="hour__status"></div>
+                    <div class="hour__temperature">13'C</div>
                 </div>
                 <div class="hour" id="hour-4">
                     <div class="hour__time">2am</div>
                     <img src="" alt="">
-                    <div class="hour_temperature">13'C</div>
+                    <div class="hour__status"></div>
+                    <div class="hour__temperature">13'C</div>
                 </div>
                 <div class="hour" id="hour-5">
                     <div class="hour__time">2am</div>
                     <img src="" alt="">
-                    <div class="hour_temperature">13'C</div>
+                    <div class="hour__status"></div>
+                    <div class="hour__temperature">13'C</div>
                 </div>
                 <div class="hour" id="hour-6">
                     <div class="hour__time">2am</div>
                     <img src="" alt="">
+                    <div class="hour__status"></div>
                     <div class="hour_temperature">13'C</div>
                 </div>
             </div>
@@ -86,32 +102,32 @@
                 <div class="day" id="day-1">
                     <div class="day__time">2am</div>
                     <img src="" alt="">
-                    <div class="day_temperature">13'C</div>
+                    <div class="day__temperature">13'C</div>
                 </div>
                 <div class="day" id="day-2">
                     <div class="day__time">2am</div>
                     <img src="" alt="">
-                    <div class="day_temperature">13'C</div>
+                    <div class="day__temperature">13'C</div>
                 </div>
                 <div class="day" id="day-3">
                     <div class="day__time">2am</div>
                     <img src="" alt="">
-                    <div class="day_temperature">13'C</div>
+                    <div class="day__temperature">13'C</div>
                 </div>
                 <div class="day" id="day-4">
                     <div class="day__time">2am</div>
                     <img src="" alt="">
-                    <div class="day_temperature">13'C</div>
+                    <div class="day-temperature">13'C</div>
                 </div>
                 <div class="day" id="day-5">
                     <div class="day__time">2am</div>
                     <img src="" alt="">
-                    <div class="day_temperature">13'C</div>
+                    <div class="day__temperature">13'C</div>
                 </div>
                 <div class="day" id="day-6">
                     <div class="day__time">2am</div>
                     <img src="" alt="">
-                    <div class="day_temperature">13'C</div>
+                    <div class="day__temperature">13'C</div>
                 </div>
             </div>
             </div>
