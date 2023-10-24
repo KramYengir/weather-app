@@ -24,6 +24,11 @@ const chanceOfRain = document.querySelector('#rain');
 const humidity = document.querySelector('#humidity');
 const wind = document.querySelector('#wind');
 
+// hourly elements
+const hourDivs = [...document.querySelectorAll('.hourly-forecast > div')];
+// daily elements
+const dayDivs = [...document.querySelectorAll('.daily-forecast > div')];
+
 // default values are Celsius & Mph
 container.classList.add('celsius');
 container.classList.add('mph');
@@ -35,6 +40,9 @@ feelsLikeImgEl.src = feelsLikeImg;
 chanceOfRainImgEl.src = rainImg;
 humidityImgEl.src = humidityImg;
 windImgEl.src = windImg;
+
+let isCelsius = true;
+let isMph = true;
 
 
 // initialize the page icons and default values
@@ -59,16 +67,63 @@ async function setAllValues(weatherObj){
     location.textContent = weatherObj.location.name;
     weatherImg.src = weatherObj.current.condition.icon;
     date.textContent = await API.getDate();
-    temp.textContent = weatherObj.current.temp_c;
+    temp.textContent = isCelsius ? 
+        weatherObj.current.temp_c+'°C'
+        :weatherObj.current.temp_f+'°F';
+
     status.textContent = weatherObj.current.condition.text;
-    feelsLike.textContent = weatherObj.current.feelslike_c;
+
+    feelsLike.textContent = isCelsius ? 
+        weatherObj.current.feelslike_c+'°C'
+        :weatherObj.current.feelslike_f+'°F';
+
     chanceOfRain.textContent = API.getChanceOfRain()+'%';
     humidity.textContent = weatherObj.current.temp_c+'%';
-    wind.textContent = weatherObj.current.gust_mph;
+    wind.textContent = isMph ? 
+        weatherObj.current.gust_mph+' mph'
+        :weatherObj.current.gust_kph+' kph';
 
     // hourly
+    setHourlyValues();
+    
     // week
+    //setDailyValues();
+}
+
+function setHourlyValues(){
+    hourDivs.forEach((div, i) =>{
+        let {hourToDisplay, status, icon, tempC, tempF} = API.getHourlyStats(i);
+
+        div.children[0].textContent = hourToDisplay;
+        div.children[2].textContent = status;
+        div.children[1].src = icon;
+        div.children[3].textContent = isCelsius ? 
+            tempC+'°C' :
+            tempF+'°F';
+    })
+}
+
+function setDailyValues(){
+    //create a method in API which returns the necessary data
+    // for next 6 days
+    // may need a date-to-day helper method
+    // maybe use min/max temp
+    // otherwise the same
+
+}
+
+function setIsCelsius(value){
+    isCelsius = value;
+}
+
+function setIsMph(value){
+    isMph = value;
 }
 
 
-export {setAllValues, init};
+export {
+    setAllValues, 
+    init, 
+    setIsCelsius, 
+    setIsMph,
+    };

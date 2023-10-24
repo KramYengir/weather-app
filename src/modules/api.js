@@ -15,6 +15,8 @@ const FORECAST_URL = 'http://api.weatherapi.com/v1/forecast.json?key=5b7362e8838
 // so we always know current searched location
 let lastLocation;
 
+// store the most recent weather call so we don't
+// have to make unnecessary calls
 let lastForecast;
 
 
@@ -54,4 +56,52 @@ function getChanceOfRain(){
     return chanceOfRain;
 }
 
-export {getForecast, getDate, getChanceOfRain};
+// HOURLY STATS
+// this is the trickiest & busiest one, I need to get hourly stats
+// and display them in 3hr increments from the current hour...
+// this takes in the hour and gets necessary stats as an object
+
+function getHourlyStats(incrementMagnitude=0){
+
+    let hour = Number(Helpers.getLocalHour(lastForecast));
+    hour += (3*incrementMagnitude);
+    let day = 0;
+
+    // change to next day when we pass midnight
+    // and fix the hour i.e. 26 will be 26-24 = 2am
+    if(hour > 23){
+        hour -= 24;
+        day = 1;
+    }
+
+    let hourObj = lastForecast.forecast.forecastday[day].hour[hour];
+    // testing
+    console.table('Hour Object', hourObj);
+
+    let hourToDisplay = Helpers.getHourToDisplay(hourObj);
+    let status = hourObj.condition.text;
+    let icon = hourObj.condition.icon;
+    let tempC = hourObj.temp_c;
+    let tempF = hourObj.temp_f;
+
+    return{
+        hourToDisplay, 
+        status,
+        icon, 
+        tempC, 
+        tempF
+    };
+ 
+}
+
+function getLatestWeatherObj(){
+    return lastForecast;
+}
+
+export {
+    getForecast,
+    getDate, 
+    getChanceOfRain, 
+    getLatestWeatherObj,
+    getHourlyStats,
+};

@@ -1,6 +1,7 @@
 import * as API from './modules/api';
 import * as Helper from './modules/helpers';
 import * as DOM from './modules/dom';
+import './modules/events';
 
 import './styles/main.scss';
 

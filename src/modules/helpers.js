@@ -4,4 +4,14 @@ function getLocalHour(weatherObj){
     return hour;
 }
 
-export {getLocalHour};
+function getHourToDisplay(hourObj){
+    let time = hourObj.time;
+    let hour = time.substring(time.length-5, time.length);
+
+    return hour;
+}
+
+export {
+    getLocalHour,
+    getHourToDisplay,    
+};
