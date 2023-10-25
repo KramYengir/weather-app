@@ -36,13 +36,13 @@ async function getForecast(location='kilcormac'){
 
 }
 
-async function getDate(){
+/* async function getDate(){
     let weatherObj = await getForecast(lastLocation);
 
     let date = weatherObj.location.localtime;
 
     return format(new Date(date), "eeee dd MMM yy HH:mm");
-}
+} */
 
 // for some reason, chance of rain is stored deep in
 // forecast > forecastday > 0 > hour > ...hours > here
@@ -76,7 +76,6 @@ function getHourlyStats(incrementMagnitude=0){
 
     let hourObj = lastForecast.forecast.forecastday[day].hour[hour];
     // testing
-    console.table('Hour Object', hourObj);
 
     let hourToDisplay = Helpers.getHourToDisplay(hourObj);
     let status = hourObj.condition.text;
@@ -94,14 +93,44 @@ function getHourlyStats(incrementMagnitude=0){
  
 }
 
+function getDailyStats(index){
+    let dailyObj = lastForecast.forecast.forecastday[index];
+
+    // helper to get nice date
+    let dayToDisplay;
+    if(index === 0){
+        dayToDisplay = 'Today';
+    }else if(index === 1){
+        dayToDisplay = 'Tomorrow'
+    } else{
+        dayToDisplay = Helpers.formatDate(dailyObj.date, 'day');
+    }
+    let status = dailyObj.day.condition.text;
+    let icon = dailyObj.day.condition.icon;
+    let hiTempC = dailyObj.day.maxtemp_c;
+    let lowTempC = dailyObj.day.lowtemp_c;
+    let hiTempF = dailyObj.day.maxtemp_f;
+    let lowTempF = dailyObj.day.lowtemp_f;
+
+    return{
+        dayToDisplay,
+        status,
+        icon,
+        hiTempC,
+        lowTempC,
+        hiTempF,
+        lowTempF,
+    }
+}
+
 function getLatestWeatherObj(){
     return lastForecast;
 }
 
 export {
     getForecast,
-    getDate, 
     getChanceOfRain, 
     getLatestWeatherObj,
     getHourlyStats,
+    getDailyStats,
 };

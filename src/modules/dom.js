@@ -1,4 +1,5 @@
 import * as API from './api';
+import * as Helper from './helpers';
 import feelsLikeImg from '../assets/feels-like.png';
 import rainImg from '../assets/rain-drops.png';
 import humidityImg from '../assets/humidity.png';
@@ -66,7 +67,7 @@ async function setAllValues(weatherObj){
     // main info
     location.textContent = weatherObj.location.name;
     weatherImg.src = weatherObj.current.condition.icon;
-    date.textContent = await API.getDate();
+    date.textContent = Helper.formatDate(weatherObj.location.localtime);
     temp.textContent = isCelsius ? 
         weatherObj.current.temp_c+'°C'
         :weatherObj.current.temp_f+'°F';
@@ -87,7 +88,7 @@ async function setAllValues(weatherObj){
     setHourlyValues();
     
     // week
-    //setDailyValues();
+    setDailyValues();
 }
 
 function setHourlyValues(){
@@ -95,8 +96,8 @@ function setHourlyValues(){
         let {hourToDisplay, status, icon, tempC, tempF} = API.getHourlyStats(i);
 
         div.children[0].textContent = hourToDisplay;
-        div.children[2].textContent = status;
         div.children[1].src = icon;
+        div.children[2].textContent = status;
         div.children[3].textContent = isCelsius ? 
             tempC+'°C' :
             tempF+'°F';
@@ -109,6 +110,24 @@ function setDailyValues(){
     // may need a date-to-day helper method
     // maybe use min/max temp
     // otherwise the same
+    dayDivs.forEach((div, i)=>{
+        let {
+            dayToDisplay,
+            status,
+            icon,
+            hiTempC, 
+            lowTempC,
+            hiTempF,
+            lowTempF
+            } = API.getDailyStats(i);
+        
+        div.children[0].textContent = dayToDisplay;
+        div.children[1].src = icon;
+        div.children[2].textContent = status;
+        div.children[3].textContent = isCelsius ? 
+        hiTempC+'°C' :
+        hiTempF+'°F';
+    })
 
 }
 

@@ -1,11 +1,14 @@
 import * as API from './api';
 import * as DOM from './dom';
 
-const container = document.querySelector('.container');
 const celsiusBtn = document.getElementById('c-btn');
 const fahrenheitBtn = document.getElementById('f-btn');
 const mphBtn = document.getElementById('mph-btn');
 const kmBtn = document.getElementById('km-btn');
+const todayBtn = document.getElementById('today-btn');
+const weekBtn = document.getElementById('week-btn');
+const hourlyDisplay = document.querySelector('.hourly-forecast');
+const dailyDisplay = document.querySelector('.daily-forecast');
 
 function changeToCelsius(){
     celsiusBtn.classList.add('selected');
@@ -62,7 +65,25 @@ function handleKmBtnClick(){
     DOM.setAllValues(weatherObj);
 }
 
+function changeToHourlyForecast(){
+    hourlyDisplay.classList.add('active');
+    todayBtn.classList.add('selected');
+    dailyDisplay.classList.remove('active');
+    weekBtn.classList.remove('selected');
+
+}
+
+function changeToDailyForecast(){
+    dailyDisplay.classList.add('active');
+    weekBtn.classList.add('selected');
+    hourlyDisplay.classList.remove('active');
+    todayBtn.classList.remove('selected');
+
+}
+
 celsiusBtn.addEventListener('click', handleCelsiusBtnClick);
 fahrenheitBtn.addEventListener('click', handleFahrenheitBtnClick);
 mphBtn.addEventListener('click', handleMphBtnClick);
 kmBtn.addEventListener('click', handleKmBtnClick);
+todayBtn.addEventListener('click', changeToHourlyForecast);
+weekBtn.addEventListener('click', changeToDailyForecast);

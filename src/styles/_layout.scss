@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
+
+$bg-color: rgba(58, 53, 53, 0.5);
+
 *,
 *::before,
 *::after {
@@ -7,6 +10,10 @@
   box-sizing: border-box;
 
   font-family: 'Open Sans', sans-serif;
+}
+
+button{
+    cursor: pointer;
 }
 
 body{
@@ -71,7 +78,7 @@ body{
 }
 
 .main-info{
-    background-color: rgba(58, 53, 53, 0.5);
+    background-color: $bg-color;
     //flex-grow: 0.4;
     padding-block: 1rem;
 
@@ -159,7 +166,7 @@ body{
         padding-block: 0.2rem;
         
         color: grey;
-        background-color: rgba(58, 53, 53, 0.5);
+        background-color:  $bg-color;
         border: none;
     }
 
@@ -171,56 +178,54 @@ body{
 
 
 .forecast{
-    background-color: rgba(255, 0, 0, 0.5);
     display: grid;
     grid-template: auto /  1fr;
-
     margin-top: 2rem;
 }
 
 .forecast-choice{
     display: flex;
     justify-content: center;
-    height: max-content;
 
     button {
         height: 35px;
-        padding: 0.5rem 0.5rem;
-        background-color: green;
+        padding: 0.5rem;
         border: none;
-        color: white;
+        color: grey;
+        background-color:  $bg-color;
+        font-weight: 100;
+
+        &.selected{
+            color: white;
+            font-weight: 600;
+        }
     }
+
+
 }
 
 .hourly-forecast,
 .daily-forecast{
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 0.2rem;
 
+    &.active{
+        display: flex;
+    }
+
     >div{
         width: 100%;
-        //height: 50px;
-        border: 1px solid blue;
-        background-color: #5c5050;
 
         display: grid;
         grid-template-columns: 0.25fr 0.4fr 0.8fr 0.3fr;
         align-items: center;
         justify-items: center;
+        background-color:  $bg-color;;
 
         img{
             width: 50px;
             height: 50px;
-        }
-
-     
-        
-    }
-    
-}
-
-
-.daily-forecast{
-    display: none;
+        }   
+    }    
 }
