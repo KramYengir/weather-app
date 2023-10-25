@@ -3,7 +3,7 @@ import * as Helpers from './helpers';
 
 
 //const CURRENT_URL = 'http://api.weatherapi.com/v1/current.json?key=5b7362e8838e44bda91125324231710';
-const FORECAST_URL = 'http://api.weatherapi.com/v1/forecast.json?key=5b7362e8838e44bda91125324231710&days=6';
+const FORECAST_URL = 'https://api.weatherapi.com/v1/forecast.json?key=5b7362e8838e44bda91125324231710&days=6';
 
 // ^^ the forecast url call also includes the current weather
 // so no need for two serperate calls
