@@ -31,7 +31,7 @@ async function getForecast(location='kilcormac'){
         return forecast
 
     }catch(error){
-        console.log(error);
+        console.log('err ',error);
     }
 
 }
@@ -100,10 +100,8 @@ function getDailyStats(index){
     let dayToDisplay;
     if(index === 0){
         dayToDisplay = 'Today';
-    }else if(index === 1){
-        dayToDisplay = 'Tomorrow'
-    } else{
-        dayToDisplay = Helpers.formatDate(dailyObj.date, 'day');
+    }else{
+        dayToDisplay = Helpers.formatDate(dailyObj.date, 'day', true);
     }
     let status = dailyObj.day.condition.text;
     let icon = dailyObj.day.condition.icon;

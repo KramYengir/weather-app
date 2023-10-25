@@ -57,32 +57,32 @@ async function init(){
 
     // load & set weather info from 'kilcormac'
     // as placeholder info
-    let weatherObj = await API.getForecast();
-    console.log(weatherObj);
-    setAllValues(weatherObj);
+    let forecast = await API.getForecast();
+    console.log(forecast);
+    setAllValues(forecast);
 
 }
 
-async function setAllValues(weatherObj){
+async function setAllValues(forecast){
     // main info
-    location.textContent = weatherObj.location.name;
-    weatherImg.src = weatherObj.current.condition.icon;
-    date.textContent = Helper.formatDate(weatherObj.location.localtime);
+    location.textContent = forecast.location.name;
+    weatherImg.src = forecast.current.condition.icon;
+    date.textContent = Helper.formatDate(forecast.location.localtime);
     temp.textContent = isCelsius ? 
-        weatherObj.current.temp_c+'°C'
-        :weatherObj.current.temp_f+'°F';
+        forecast.current.temp_c+'°C'
+        :forecast.current.temp_f+'°F';
 
-    status.textContent = weatherObj.current.condition.text;
+    status.textContent = forecast.current.condition.text;
 
     feelsLike.textContent = isCelsius ? 
-        weatherObj.current.feelslike_c+'°C'
-        :weatherObj.current.feelslike_f+'°F';
+        forecast.current.feelslike_c+'°C'
+        :forecast.current.feelslike_f+'°F';
 
     chanceOfRain.textContent = API.getChanceOfRain()+'%';
-    humidity.textContent = weatherObj.current.temp_c+'%';
+    humidity.textContent = forecast.current.temp_c+'%';
     wind.textContent = isMph ? 
-        weatherObj.current.gust_mph+' mph'
-        :weatherObj.current.gust_kph+' kph';
+        forecast.current.gust_mph+' mph'
+        :forecast.current.gust_kph+' kph';
 
     // hourly
     setHourlyValues();

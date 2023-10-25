@@ -1,6 +1,8 @@
 import * as API from './api';
 import * as DOM from './dom';
 
+const searchBtn = document.querySelector('.search-box > button')
+const searchInput = document.querySelector('.search-box > input');
 const celsiusBtn = document.getElementById('c-btn');
 const fahrenheitBtn = document.getElementById('f-btn');
 const mphBtn = document.getElementById('mph-btn');
@@ -9,6 +11,18 @@ const todayBtn = document.getElementById('today-btn');
 const weekBtn = document.getElementById('week-btn');
 const hourlyDisplay = document.querySelector('.hourly-forecast');
 const dailyDisplay = document.querySelector('.daily-forecast');
+
+async function handleSearchBtnClick(){
+    let userInput = searchInput.value;
+    if(userInput == '') return;
+
+    console.log('input ', userInput);
+    let result = await API.getForecast(userInput);
+    //need to check result for errors ^
+    DOM.setAllValues(result);
+
+    searchInput.value = '';
+}
 
 function changeToCelsius(){
     celsiusBtn.classList.add('selected');
@@ -81,6 +95,10 @@ function changeToDailyForecast(){
 
 }
 
+searchBtn.addEventListener('click', handleSearchBtnClick);
+searchInput.addEventListener('keyup', (e)=>{
+    if(e.key == 'Enter') handleSearchBtnClick();
+})
 celsiusBtn.addEventListener('click', handleCelsiusBtnClick);
 fahrenheitBtn.addEventListener('click', handleFahrenheitBtnClick);
 mphBtn.addEventListener('click', handleMphBtnClick);
