@@ -1,5 +1,6 @@
 import format from "date-fns/format";
 import * as Helpers from './helpers';
+import { displayErrorMsg } from "./dom";
 
 
 //const CURRENT_URL = 'http://api.weatherapi.com/v1/current.json?key=5b7362e8838e44bda91125324231710';
@@ -19,6 +20,20 @@ let lastForecast;
 async function getForecast(location='kilcormac'){
     try{
         let response = await fetch(`${FORECAST_URL}&q=${location}`);
+        // check that the response is fine
+        if (response.status === 404) {
+            displayErrorMsg("Sorry, we're having trouble...");
+            throw new Error('Page not found');
+          } else if (response.status === 500) {
+            displayErrorMsg("Sorry, problems with the server...");
+            throw new Error('Server error');
+        } else if (response.status === 400) {
+            displayErrorMsg("Sorry, can't find such a place...");
+            throw new Error('Bad Request');
+          } else if (!response.ok) {
+            displayErrorMsg("Sorry, we're having trouble...");
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
         let forecast = await response.json();
 
         lastLocation = location;
@@ -29,7 +44,7 @@ async function getForecast(location='kilcormac'){
         return forecast
 
     }catch(error){
-        console.log('err ',error);
+        console.error(error);
     }
 
 }
@@ -80,6 +95,7 @@ function getHourlyStats(incrementMagnitude=0){
     let hourToDisplay = Helpers.getHourToDisplay(hourObj);
     let status = hourObj.condition.text;
     let icon = hourObj.condition.icon;
+    let altText = hourObj.condition.text;
     let tempC = hourObj.temp_c;
     let tempF = hourObj.temp_f;
 
@@ -90,7 +106,8 @@ function getHourlyStats(incrementMagnitude=0){
     return{
         hourToDisplay, 
         status,
-        icon, 
+        icon,
+        altText, 
         tempC, 
         tempF
     };
@@ -109,6 +126,7 @@ function getDailyStats(index){
     }
     let status = dailyObj.day.condition.text;
     let icon = dailyObj.day.condition.icon;
+    let altText = dailyObj.day.condition.text;
     let hiTempC = dailyObj.day.maxtemp_c;
     let lowTempC = dailyObj.day.lowtemp_c;
     let hiTempF = dailyObj.day.maxtemp_f;
@@ -118,6 +136,7 @@ function getDailyStats(index){
         dayToDisplay,
         status,
         icon,
+        altText,
         hiTempC,
         lowTempC,
         hiTempF,

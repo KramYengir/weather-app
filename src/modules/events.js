@@ -18,8 +18,13 @@ async function handleSearchBtnClick(){
 
     console.log('input ', userInput);
     let result = await API.getForecast(userInput);
+    
     //need to check result for errors ^
-    DOM.setAllValues(result);
+    if(result === undefined){
+        console.log('bllloooop');
+    } else{
+        DOM.setAllValues(result);
+    }
 
     searchInput.value = '';
 }
@@ -98,6 +103,9 @@ function changeToDailyForecast(){
 searchBtn.addEventListener('click', handleSearchBtnClick);
 searchInput.addEventListener('keyup', (e)=>{
     if(e.key == 'Enter') handleSearchBtnClick();
+})
+searchInput.addEventListener('keydown', (e)=>{
+    DOM.displayErrorMsg('');
 })
 celsiusBtn.addEventListener('click', handleCelsiusBtnClick);
 fahrenheitBtn.addEventListener('click', handleFahrenheitBtnClick);

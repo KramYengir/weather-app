@@ -7,7 +7,7 @@ import windImg from '../assets/wind.png';
 import cloudIcon from '../assets/cloud-icon.png';
 
 const favicon = document.querySelector('link');
-
+const errorMsg = document.querySelector('.error-msg');
 const weatherImg = document.querySelector('.weather-img>img');
 const location = document.querySelector('.city');
 const date = document.querySelector('.date');
@@ -67,22 +67,23 @@ async function setAllValues(forecast){
     // main info
     location.textContent = forecast.location.name;
     weatherImg.src = forecast.current.condition.icon;
+    weatherImg.alt = forecast.current.condition.text;
     date.textContent = Helper.formatDate(forecast.location.localtime);
-    temp.textContent = isCelsius ? 
-        Math.round(forecast.current.temp_c)+'°C'
-        :Math.round(forecast.current.temp_f)+'°F';
+    temp.innerHTML = isCelsius ? 
+        Math.round(forecast.current.temp_c)+`<span class='temp-unit'>°C</span>`
+        :Math.round(forecast.current.temp_f)+`<span class='temp-unit'>°F</span>`;
 
     status.textContent = forecast.current.condition.text;
 
-    feelsLike.textContent = isCelsius ? 
-        Math.round(forecast.current.feelslike_c)+'°C'
-        :Math.round(forecast.current.feelslike_f)+'°F';
+    feelsLike.innerHTML = isCelsius ? 
+        Math.round(forecast.current.feelslike_c)+`<span class='feels-like-temp-unit'>°C</span>`
+        :Math.round(forecast.current.feelslike_f)+`<span class='feels-like-temp-unit'>°F</span>`;
 
     chanceOfRain.textContent = API.getChanceOfRain()+'%';
     humidity.textContent = forecast.current.temp_c+'%';
-    wind.textContent = isMph ? 
-        forecast.current.gust_mph+' mph'
-        :forecast.current.gust_kph+' km/h';
+    wind.innerHTML = isMph ? 
+        Math.round(forecast.current.gust_mph)+`<span class='wind-unit'>mph</span>`
+        :Math.round(forecast.current.gust_kph)+`<span class='wind-unit'>km/h</span>`
 
     // hourly
     setHourlyValues();
@@ -93,10 +94,11 @@ async function setAllValues(forecast){
 
 function setHourlyValues(){
     hourDivs.forEach((div, i) =>{
-        let {hourToDisplay, status, icon, tempC, tempF} = API.getHourlyStats(i);
+        let {hourToDisplay, status, icon, altText, tempC, tempF} = API.getHourlyStats(i);
 
         div.children[0].textContent = hourToDisplay;
         div.children[1].src = icon;
+        div.children[1].alt = altText;
         div.children[2].textContent = status;
         div.children[3].textContent = isCelsius ? 
             tempC+'°C' :
@@ -115,6 +117,7 @@ function setDailyValues(){
             dayToDisplay,
             status,
             icon,
+            altText,
             hiTempC, 
             lowTempC,
             hiTempF,
@@ -123,6 +126,7 @@ function setDailyValues(){
         
         div.children[0].textContent = dayToDisplay;
         div.children[1].src = icon;
+        div.children[1].alt = altText;
         div.children[2].textContent = status;
         div.children[3].textContent = isCelsius ? 
         hiTempC+'°C' :
@@ -139,10 +143,15 @@ function setIsMph(value){
     isMph = value;
 }
 
+function displayErrorMsg(msg){
+    errorMsg.textContent = msg;
+}
+
 
 export {
     setAllValues, 
     init, 
     setIsCelsius, 
     setIsMph,
+    displayErrorMsg,
     };

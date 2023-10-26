@@ -25,12 +25,12 @@ function getHourToDisplay(hourObj){
 // 'https://github.com/bscottnz/weather-app/blob/main/src/js/utils.js'
 function formatDate(date, dateFormat = 'full', wantShortDay = false) {
     const dateString = new Date(date).toString();
-    let dayOfWeek = dateString.slice(0, 3);
-    let dayOfMonth = dateString.slice(8, 10);
     const month = dateString.slice(4, 8);
     const year = dateString.slice(13, 15);
-    const time = dateString.slice(16,21);
-    const hour = dateString.slice(16,18);
+    let hour = dateString.slice(16,18);
+    let dayOfWeek = dateString.slice(0, 3);
+    let dayOfMonth = dateString.slice(8, 10);
+    let time = dateString.slice(16,21);
     let daySuffix;
     let timeSuffix;
 
@@ -52,11 +52,15 @@ function formatDate(date, dateFormat = 'full', wantShortDay = false) {
       daySuffix = 'th';
     }
 
-    // generate corrct time suffix
+    // generate correct time suffix
     if(hour <= 12){
       timeSuffix = 'am';
     }else{
       timeSuffix = 'pm';
+    }
+    // and 12hr format
+    if(hour > 12 || hour < 10){
+      time = hour.slice(1,2)+time.slice(3,5);
     }
   
     // those pesky 11, 12, 13 ths

@@ -2,6 +2,9 @@
 
 $bg-color: rgba(58, 53, 53, 0.5);
 
+// sizes
+$unit-size: 11px;
+
 *,
 *::before,
 *::after {
@@ -49,7 +52,7 @@ body{
 
     display: flex;
     justify-content: center;
-    margin-block: 1rem;
+    margin-top: 1rem;
 
     *{
         border: none;
@@ -78,6 +81,16 @@ body{
         background-size: cover;
     }
 
+}
+
+.error-msg{
+    display: flex;
+    margin-left: 3rem;
+    min-height: 1rem;
+    margin-bottom: 1rem;
+
+    font-size: max(12px, 0.8rem);
+    color: whitesmoke;
 }
 
 .main-info{
@@ -127,7 +140,6 @@ body{
             position: relative;
             font-size: 2rem;
         }
-
         
     }
     
@@ -135,28 +147,38 @@ body{
     
     .stats{
         display: flex;
-        margin-top: 2rem;
+        margin: 2rem 0 0.2rem;
     
         .stat-box{
-            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            line-height: 1rem;
             flex: 0.25;
-            //border: 1px solid red;
-    
-            text-align: center;
-    
-            p{
-                padding: 0.2rem;
-                min-height: 2.5rem;
-            }
 
             img{
                 width: 30px;
                 height: 30px;
-            }
-
+            }            
         }
     }
 }
+
+.wind-unit{
+    font-size: $unit-size;
+}
+
+.temp-unit{
+    font-size: $unit-size;
+    vertical-align: super;
+}
+
+.feels-like-temp-unit{
+    font-size: calc($unit-size * 0.8);
+    vertical-align: top;
+}
+
 
 
 .options{
