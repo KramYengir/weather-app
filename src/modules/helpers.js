@@ -59,9 +59,11 @@ function formatDate(date, dateFormat = 'full', wantShortDay = false) {
       timeSuffix = 'pm';
     }
     // and 12hr format
-    if(hour > 12 || hour < 10){
-      time = hour.slice(1,2)+time.slice(3,5);
+    if(hour > 12){
+      hour -= 12;
+      time = String(hour).slice(0,2)+':'+time.slice(3,5);
     }
+  
   
     // those pesky 11, 12, 13 ths
     if (dayOfMonth > 3 && dayOfMonth < 21) {

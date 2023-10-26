@@ -3,7 +3,10 @@
 $bg-color: rgba(58, 53, 53, 0.5);
 
 // sizes
-$unit-size: 11px;
+$large-font: 1.2rem;
+$med-font: 1rem;
+$small-font: 0.8rem;
+$unit-size: 14px;
 
 *,
 *::before,
@@ -27,7 +30,7 @@ body{
     background-position: center;
     padding-top: 1rem;
 
-    font-size: 0.9rem;
+    font-size: $small-font;
     color: white;
 }
 
@@ -37,9 +40,10 @@ body{
     flex-direction: column;
     align-items: center;
     //gap: 1rem;
-    width: 100%;
+    margin-inline: auto;
+    width: min(100%, 800px);
     height: 100vh;
-    overflow-y: scroll;
+    overflow-y: scroll hidden;
 
     >div{
         width: 80%;
@@ -63,12 +67,17 @@ body{
     input{
         height: 2rem;
         color: white;
-        font-size: large;
+        font-size: larger;
+        padding: 0 0 0.1rem 0.8rem;
         
         &::placeholder{
             color: rgba(255, 255, 255, 0.548);
             font-size: 1rem;
             padding-left: 0.2rem;
+        }
+
+        &:focus{
+            outline: none;
         }
     }
 
@@ -85,7 +94,7 @@ body{
 
 .error-msg{
     display: flex;
-    margin-left: 3rem;
+    padding-left: 3rem;
     min-height: 1rem;
     margin-bottom: 1rem;
 
@@ -94,14 +103,15 @@ body{
 }
 
 .main-info{
-    background-color: $bg-color;
-    //flex-grow: 0.4;
-    padding-block: 1rem;
-
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.2rem;
+
+    
+    background-color: $bg-color;
+    padding-block: 1rem;
+    border-radius: 10px 10px 0 0;
 
     >div{
         //border: 1px solid white;
@@ -133,7 +143,7 @@ body{
         align-items: center;
 
         img{
-            width: 5.5rem;
+            width: 6rem;
         }
         
         .temperature{
@@ -205,7 +215,7 @@ body{
 .forecast{
     display: grid;
     grid-template: auto /  1fr;
-    margin-top: 2rem;
+    margin-block: 2rem;
 }
 
 .forecast-choice{
