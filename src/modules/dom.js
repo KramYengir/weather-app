@@ -69,20 +69,20 @@ async function setAllValues(forecast){
     weatherImg.src = forecast.current.condition.icon;
     date.textContent = Helper.formatDate(forecast.location.localtime);
     temp.textContent = isCelsius ? 
-        forecast.current.temp_c+'°C'
-        :forecast.current.temp_f+'°F';
+        Math.round(forecast.current.temp_c)+'°C'
+        :Math.round(forecast.current.temp_f)+'°F';
 
     status.textContent = forecast.current.condition.text;
 
     feelsLike.textContent = isCelsius ? 
-        forecast.current.feelslike_c+'°C'
-        :forecast.current.feelslike_f+'°F';
+        Math.round(forecast.current.feelslike_c)+'°C'
+        :Math.round(forecast.current.feelslike_f)+'°F';
 
     chanceOfRain.textContent = API.getChanceOfRain()+'%';
     humidity.textContent = forecast.current.temp_c+'%';
     wind.textContent = isMph ? 
         forecast.current.gust_mph+' mph'
-        :forecast.current.gust_kph+' kph';
+        :forecast.current.gust_kph+' km/h';
 
     // hourly
     setHourlyValues();

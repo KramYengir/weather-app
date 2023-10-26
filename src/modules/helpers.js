@@ -1,7 +1,13 @@
 function getLocalHour(weatherObj){
-    let hour = weatherObj.location.localtime.substring(11, 13);
+  // how I cut out the hour is causing problems
+  // when it's a single-digit hour
+  // so i default it to a date format
+  // and cut the hour from that
 
-    return hour;
+  let date = new Date(weatherObj.location.localtime);
+  let hour = String(date).substring(16, 18);
+
+  return hour;
 }
 
 function getHourToDisplay(hourObj){
@@ -11,35 +17,51 @@ function getHourToDisplay(hourObj){
     return hour;
 }
 
-// excellent piece of helper code I borrowed from
+// helpful for slicing...
+//012345678901234567890123
+//Thu Oct 26 2023 13:16:00 GMT+0100
+
+// excellent piece of helper code I borrowed & modified from
 // 'https://github.com/bscottnz/weather-app/blob/main/src/js/utils.js'
 function formatDate(date, dateFormat = 'full', wantShortDay = false) {
-    const dateString = new Date(date).toUTCString();
+    const dateString = new Date(date).toString();
     let dayOfWeek = dateString.slice(0, 3);
-    let dayOfMonth = dateString.slice(5, 7);
-    const month = dateString.slice(8, 11);
-    const year = dateString.slice(14, 16);
-    let suffix;
+    let dayOfMonth = dateString.slice(8, 10);
+    const month = dateString.slice(4, 8);
+    const year = dateString.slice(13, 15);
+    const time = dateString.slice(16,21);
+    const hour = dateString.slice(16,18);
+    let daySuffix;
+    let timeSuffix;
+
+    //console.log('date string ', dateString);
   
     // change 01 to 1 etc
     if (dayOfMonth < 10) {
       dayOfMonth = dayOfMonth.slice(1);
     }
   
-    // generate corect date suffix
+    // generate corect date daySuffix
     if (dayOfMonth.slice(-1) === '1') {
-      suffix = 'st';
+      daySuffix = 'st';
     } else if (dayOfMonth.slice(-1) === '2') {
-      suffix = 'nd';
+      daySuffix = 'nd';
     } else if (dayOfMonth.slice(-1) === '3') {
-      suffix = 'rd';
+      daySuffix = 'rd';
     } else {
-      suffix = 'th';
+      daySuffix = 'th';
+    }
+
+    // generate corrct time suffix
+    if(hour <= 12){
+      timeSuffix = 'am';
+    }else{
+      timeSuffix = 'pm';
     }
   
     // those pesky 11, 12, 13 ths
     if (dayOfMonth > 3 && dayOfMonth < 21) {
-      suffix = 'th';
+      daySuffix = 'th';
     }
   
     // convert short day name to full day name
@@ -67,7 +89,7 @@ function formatDate(date, dateFormat = 'full', wantShortDay = false) {
     }
   
     // return full date string
-    return `${dayOfWeek}, ${dayOfMonth}${suffix} ${month} '${year}`;
+    return `${time}${timeSuffix}, ${dayOfWeek}, ${dayOfMonth}${daySuffix} ${month} '${year}`;
   }
 
 export {

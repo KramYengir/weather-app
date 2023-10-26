@@ -8,10 +8,6 @@ const FORECAST_URL = 'https://api.weatherapi.com/v1/forecast.json?key=5b7362e883
 // ^^ the forecast url call also includes the current weather
 // so no need for two serperate calls
 
-// this gets a weather object which we will use 
-// to get all our other bits of info in our 
-// functions below
-
 // so we always know current searched location
 let lastLocation;
 
@@ -27,6 +23,8 @@ async function getForecast(location='kilcormac'){
 
         lastLocation = location;
         lastForecast = forecast;
+
+        console.log('forecast called ', forecast);
 
         return forecast
 
@@ -50,7 +48,9 @@ async function getForecast(location='kilcormac'){
 // so we make use of a helper function which returns 
 // the current local hour
 function getChanceOfRain(){
-    let localHour =  Helpers.getLocalHour(lastForecast); //returns 11
+    let localHour =  Number(Helpers.getLocalHour(lastForecast)); 
+    console.log('local hour ', localHour.length, localHour);
+    console.log('local hour city', lastForecast);
     let chanceOfRain = lastForecast.forecast.forecastday[0].hour[localHour].chance_of_rain;
 
     return chanceOfRain;
@@ -82,6 +82,10 @@ function getHourlyStats(incrementMagnitude=0){
     let icon = hourObj.condition.icon;
     let tempC = hourObj.temp_c;
     let tempF = hourObj.temp_f;
+
+    // round-off temps
+    tempC = Math.round(tempC);
+    tempF = Math.round(tempF);
 
     return{
         hourToDisplay, 
