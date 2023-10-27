@@ -1,12 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
-
-$bg-color: rgba(58, 53, 53, 0.5);
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&family=Roboto&display=swap');
+$bg-color: rgba(0, 0, 0, 0.151);
 
 // sizes
-$large-font: 1.2rem;
-$med-font: 1rem;
-$small-font: 0.8rem;
-$unit-size: 14px;
+$large-font: calc(1.2rem + 0.3vw);
+$med-font: calc(0.9rem + 0.3vw);
+$small-font: calc(0.8rem + 0.3vw);
+$unit-size: calc($small-font - 0.2vw);
 
 *,
 *::before,
@@ -15,7 +14,8 @@ $unit-size: 14px;
   padding: 0;
   box-sizing: border-box;
 
-  font-family: 'Open Sans', sans-serif;
+  //font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 button{
@@ -32,6 +32,10 @@ body{
 
     font-size: $small-font;
     color: white;
+
+    @media screen and (max-height: 800px) {
+        background-size: auto;    
+    }
 }
 
 .container{
@@ -41,14 +45,25 @@ body{
     align-items: center;
     //gap: 1rem;
     margin-inline: auto;
-    width: min(100%, 800px);
+    width: 100%;
     max-height: 100%;
-    overflow-y: scroll;
 
+    @media screen and (max-width: 600px) {
+        overflow-y: scroll;
+
+    }
+    
+    
     >div{
-        width: 80%;
+        width: min(80%, 600px);
+
+        &.main-info,
+        &.options{
+            width: min(80%, 400px)
+        }
     }
 }
+
 
 .search-box{
     //background-color: rgba(0, 128, 0, 0.5);
@@ -67,12 +82,13 @@ body{
     input{
         height: 2rem;
         color: white;
-        font-size: larger;
+        font-size: $med-font;
         padding: 0 0 0.1rem 0.8rem;
+        text-transform: uppercase;
         
         &::placeholder{
             color: rgba(255, 255, 255, 0.548);
-            font-size: 1rem;
+            font-size: $med-font;
             padding-left: 0.2rem;
         }
 
@@ -94,12 +110,12 @@ body{
 
 .error-msg{
     display: flex;
-    padding-left: 3rem;
+    justify-content: center;
     min-height: 1rem;
-    margin-bottom: 1rem;
+    margin-block: 0.2rem 1rem;
 
-    font-size: max(12px, 0.8rem);
-    color: whitesmoke;
+    font-size: $small-font;
+    color: rgb(255, 255, 255);
 }
 
 .main-info{
@@ -114,25 +130,21 @@ body{
     border-radius: 10px 10px 0 0;
 
     >div{
-        //border: 1px solid white;
         min-width: 100%;
         text-align: center;
-        //padding-block: 0.2rem;
         
     }
 
     .city{
-        font-size: 1.5rem;
-        //font-weight: 600;
+        font-size: $large-font;
     }
     
     .date{
-        font-size: 1rem;
+        font-size: $small-font;
     }
     
     .status{
-        font-size: 1.5rem;
-        //font-weight: 600;
+        font-size: $large-font;
         text-transform: capitalize;
         margin-top: 1rem;
     }
@@ -143,7 +155,7 @@ body{
         align-items: center;
 
         img{
-            width: 6rem;
+            width: 6.5rem;
         }
         
         .temperature{
@@ -185,7 +197,7 @@ body{
 }
 
 .feels-like-temp-unit{
-    font-size: calc($unit-size * 0.8);
+    font-size: calc($unit-size * 0.9);
     vertical-align: top;
 }
 
@@ -199,14 +211,15 @@ body{
         width: 60px;
         height: 100%;
         padding-block: 0.2rem;
+        background-color: $bg-color;
         
-        color: grey;
-        background-color:  $bg-color;
+        color: rgb(145, 145, 145);
         border: none;
     }
-
+    
     button.selected{
         color: white;
+        background-color:  $bg-color;
         font-weight: 600;
     }
 }
@@ -221,6 +234,7 @@ body{
 .forecast-choice{
     display: flex;
     justify-content: center;
+    gap: 0.5rem;
 
     button {
         height: 35px;
