@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&family=Roboto&display=swap');
+
 $bg-color: rgba(0, 0, 0, 0.151);
+$bg-gradient: linear-gradient(to right, #0000008a, #0000008a);
+$bg-image: url('../assets/peak-district.jpg');
 
 // sizes
 $large-font: calc(1.2rem + 0.3vw);
@@ -25,7 +28,7 @@ button{
 body{
     height: 100vh;
     width: 100vw;
-    background: linear-gradient(to right, #0000008a, #0000008a), url('../assets/peak-district.jpg');
+    background: $bg-gradient, $bg-image;
     background-size: cover;
     background-position: center;
     padding-top: 1rem;
@@ -33,9 +36,9 @@ body{
     font-size: $small-font;
     color: white;
 
-    @media screen and (max-height: 800px) {
-        background-size: auto;    
-    }
+/*     @media screen and (max-height: 800px) {
+        background-size: cover;    
+    } */
 }
 
 .container{
@@ -55,7 +58,7 @@ body{
     
     
     >div{
-        width: min(80%, 600px);
+        width: min(80%, 800px);
 
         &.main-info,
         &.options{
@@ -277,6 +280,20 @@ body{
         img{
             width: 35px;
             height: 35px;
-        }   
+        } 
+        
+        .day__temperature_min{
+            display: none;
+        }
     }    
+}
+@media screen and (min-width: 700px) {
+    .daily-forecast{
+        >div{ 
+             grid-template-columns: 0.25fr 0.4fr 0.8fr 0.3fr 0.3fr;
+            .day__temperature_min{
+                    display: block;
+            }
+         }
+    }
 }

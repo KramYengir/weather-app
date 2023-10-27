@@ -129,8 +129,11 @@ function setDailyValues(){
         div.children[1].alt = altText;
         div.children[2].textContent = status;
         div.children[3].textContent = isCelsius ? 
-        Math.round(hiTempC)+'°C' :
-        Math.round(hiTempF)+'°F';
+        '▼ '+Math.round(lowTempF)+'°F':
+        '▼ '+Math.round(lowTempC)+'°C' ;
+        div.children[4].textContent = isCelsius ? 
+        '▲ '+Math.round(hiTempC)+'°C' :
+        '▲ '+Math.round(hiTempF)+'°F';
     })
 
 }

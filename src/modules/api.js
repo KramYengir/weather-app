@@ -128,9 +128,9 @@ function getDailyStats(index){
     let icon = dailyObj.day.condition.icon;
     let altText = dailyObj.day.condition.text;
     let hiTempC = dailyObj.day.maxtemp_c;
-    let lowTempC = dailyObj.day.lowtemp_c;
+    let lowTempC = dailyObj.day.mintemp_c;
     let hiTempF = dailyObj.day.maxtemp_f;
-    let lowTempF = dailyObj.day.lowtemp_f;
+    let lowTempF = dailyObj.day.mintemp_f;
 
     return{
         dayToDisplay,
