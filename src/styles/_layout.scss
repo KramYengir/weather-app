@@ -3,8 +3,8 @@ $bg-color: rgba(0, 0, 0, 0.151);
 
 // sizes
 $large-font: calc(1.2rem + 0.3vw);
-$med-font: calc(0.9rem + 0.3vw);
-$small-font: calc(0.8rem + 0.3vw);
+$med-font: calc(0.9rem + 0.2vw);
+$small-font: calc(0.8rem + 0.2vw);
 $unit-size: calc($small-font - 0.2vw);
 
 *,
@@ -141,12 +141,13 @@ body{
     
     .date{
         font-size: $small-font;
+        color: whitesmoke;
     }
     
     .status{
         font-size: $large-font;
         text-transform: capitalize;
-        margin-top: 1rem;
+        margin-top: 1.5rem;
     }
 
     .img-and-temp{
@@ -169,7 +170,7 @@ body{
     
     .stats{
         display: flex;
-        margin: 2rem 0 0.2rem;
+        margin: 1.5rem 0 0.2rem;
     
         .stat-box{
             display: flex;
