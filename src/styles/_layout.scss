@@ -293,6 +293,15 @@ body{
              grid-template-columns: 0.25fr 0.4fr 0.8fr 0.3fr 0.3fr;
             .day__temperature_min{
                     display: block;
+
+                    &::before{
+                        content: '▼ ';
+                    }
+            }
+
+            .day__temperature_max::before{
+                content: '▲ ';
+
             }
          }
     }
