@@ -285,6 +285,11 @@ body{
         .day__temperature_min{
             display: none;
         }
+
+        .day__temperature_max::before{
+            content: '';
+
+        }
     }    
 }
 @media screen and (min-width: 700px) {
