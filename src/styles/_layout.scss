@@ -37,9 +37,6 @@ body{
     font-size: $small-font;
     color: white;
 
-/*     @media screen and (max-height: 800px) {
-        background-size: cover;    
-    } */
 }
 
 .container{
@@ -59,7 +56,7 @@ body{
     
     
     >div{
-        width: min(80%, 800px);
+        width: min(80%, 1000px);
 
         &.main-info,
         &.options{
@@ -229,86 +226,72 @@ body{
     }
 }
 
+.forecast-title{
+    margin-top: 3rem;
+    padding-bottom: 0.5rem;
+    font-size: $large-font;
+    text-align: center;
+    //text-transform: uppercase;
+    //background-color: $bg-color;
+}
 
 .forecast{
-    display: grid;
-    grid-template: auto /  1fr;
-    margin-block: 2rem;
-}
-
-.forecast-choice{
     display: flex;
     justify-content: center;
-    gap: 0.5rem;
+    margin-bottom: 1rem;
 
-    button {
-        height: 35px;
-        padding: 0.5rem;
-        border: none;
-        color: grey;
-        background-color:  $bg-color;
-        font-weight: 100;
+    //put some shadow/blur effect on sides
+   /*  box-shadow: -2px 0px 0px 0px rgba(102, 100, 100, 0.479), 
+                2px 0px 0px 0px rgba(102, 100, 100, 0.479); */
+    /* box-shadow: inset 10px 0 10px -5px rgba(102, 100, 100, 0.479),
+                inset -10px 0 10px -5px rgba(102, 100, 100, 0.479); */
 
-        &.selected{
-            color: white;
-            font-weight: 600;
-        }
-    }
-
-
-}
-
-.hourly-forecast,
-.daily-forecast{
-    display: none;
-    flex-direction: column;
-    gap: 0.2rem;
-
-    &.active{
+    .hourly-forecast{
         display: flex;
-    }
+        gap: 0.8rem;
+        overflow-x: scroll;
 
-    >div{
-        width: 100%;
-        height: 50px;
+        @media (min-width: 1225px){
+            overflow-x: hidden;
 
-        display: grid;
-        grid-template-columns: 0.25fr 0.4fr 0.8fr 0.3fr;
-        align-items: center;
-        justify-items: center;
-        background-color:  $bg-color;;
+        }
+    
+        //padding-bottom: 3em;
+    
+        >div{
+            z-index: 1;
+            width: 100px;
+            padding-block: 1rem;
+    
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            text-align: center;
+    
+            background-color:  $bg-color;
+    
+            .hour__time{
+                font-size: $large-font;
+            }
+    
+            .img-container{
+                width: 70px;
+                height: 75px;
+    
+                img{
+                    width: 100%;
+                    height: 70px;
+                    padding: 0;
+                } 
+            }
 
-        img{
-            width: 35px;
-            height: 35px;
-        } 
+            .hour__temperature{
+                font-size: $med-font;
+            }
+    
         
-        .day__temperature_min{
-            display: none;
-        }
-
-        .day__temperature_max::before{
-            content: '';
-
-        }
-    }    
-}
-@media screen and (min-width: 700px) {
-    .daily-forecast{
-        >div{ 
-             grid-template-columns: 0.25fr 0.4fr 0.8fr 0.3fr 0.3fr;
-            .day__temperature_min{
-                    display: block;
-
-                    &::before{
-                        content: '▼ ';
-                    }
-            }
-
-            .day__temperature_max::before{
-                content: '▲ ';
-
-            }
-         }
+        }    
     }
 }
