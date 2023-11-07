@@ -28,7 +28,7 @@ const wind = document.querySelector('#wind');
 // hourly elements
 const hourDivs = [...document.querySelectorAll('.hourly-forecast > div')];
 // daily elements
-const dayDivs = [...document.querySelectorAll('.daily-forecast > div')];
+//const dayDivs = [...document.querySelectorAll('.daily-forecast > div')];
 
 // default values are Celsius & Mph
 container.classList.add('celsius');
@@ -89,15 +89,15 @@ async function setAllValues(forecast){
     setHourlyValues();
     
     // week
-    setDailyValues();
+    //setDailyValues();
 }
 
 function setHourlyValues(){
     hourDivs.forEach((div, i) =>{
         let {hourToDisplay, status, icon, altText, tempC, tempF} = API.getHourlyStats(i);
 
-        div.children[0].textContent = hourToDisplay;
-        div.children[1].src = icon;
+        div.children[0].textContent = hourToDisplay.slice(0,2);
+        div.children[1].children[0].src = icon;
         div.children[1].alt = altText;
         div.children[2].textContent = status;
         div.children[3].textContent = isCelsius ? 
@@ -106,7 +106,7 @@ function setHourlyValues(){
     })
 }
 
-function setDailyValues(){
+/* function setDailyValues(){
     //create a method in API which returns the necessary data
     // for next 6 days
     // may need a date-to-day helper method
@@ -136,7 +136,7 @@ function setDailyValues(){
         Math.round(hiTempF)+'°F';
     })
 
-}
+} */
 
 function setIsCelsius(value){
     isCelsius = value;
