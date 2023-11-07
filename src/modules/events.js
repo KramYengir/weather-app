@@ -7,10 +7,10 @@ const celsiusBtn = document.getElementById('c-btn');
 const fahrenheitBtn = document.getElementById('f-btn');
 const mphBtn = document.getElementById('mph-btn');
 const kmBtn = document.getElementById('km-btn');
-const todayBtn = document.getElementById('today-btn');
-const weekBtn = document.getElementById('week-btn');
+//const todayBtn = document.getElementById('today-btn');
+//const weekBtn = document.getElementById('week-btn');
 const hourlyDisplay = document.querySelector('.hourly-forecast');
-const dailyDisplay = document.querySelector('.daily-forecast');
+//const dailyDisplay = document.querySelector('.daily-forecast');
 
 async function handleSearchBtnClick(){
     let userInput = searchInput.value;
@@ -84,7 +84,7 @@ function handleKmBtnClick(){
     DOM.setAllValues(weatherObj);
 }
 
-function changeToHourlyForecast(){
+/* function changeToHourlyForecast(){
     hourlyDisplay.classList.add('active');
     todayBtn.classList.add('selected');
     dailyDisplay.classList.remove('active');
@@ -98,7 +98,7 @@ function changeToDailyForecast(){
     hourlyDisplay.classList.remove('active');
     todayBtn.classList.remove('selected');
 
-}
+} */
 
 searchBtn.addEventListener('click', handleSearchBtnClick);
 searchInput.addEventListener('keyup', (e)=>{
@@ -111,5 +111,5 @@ celsiusBtn.addEventListener('click', handleCelsiusBtnClick);
 fahrenheitBtn.addEventListener('click', handleFahrenheitBtnClick);
 mphBtn.addEventListener('click', handleMphBtnClick);
 kmBtn.addEventListener('click', handleKmBtnClick);
-todayBtn.addEventListener('click', changeToHourlyForecast);
-weekBtn.addEventListener('click', changeToDailyForecast);
+/* todayBtn.addEventListener('click', changeToHourlyForecast);
+weekBtn.addEventListener('click', changeToDailyForecast); */
