@@ -49,13 +49,6 @@ async function getForecast(location='kilcormac'){
 
 }
 
-/* async function getDate(){
-    let weatherObj = await getForecast(lastLocation);
-
-    let date = weatherObj.location.localtime;
-
-    return format(new Date(date), "eeee dd MMM yy HH:mm");
-} */
 
 // for some reason, chance of rain is stored deep in
 // forecast > forecastday > 0 > hour > ...hours > here
@@ -76,10 +69,10 @@ function getChanceOfRain(){
 // and display them in 3hr increments from the current hour...
 // this takes in the hour and gets necessary stats as an object
 
-function getHourlyStats(incrementMagnitude=0){
+function getHourlyStats(i) {
 
     let hour = Number(Helpers.getLocalHour(lastForecast));
-    hour += (3*incrementMagnitude);
+    hour += (i);
     let day = 0;
 
     // change to next day when we pass midnight
@@ -114,7 +107,7 @@ function getHourlyStats(incrementMagnitude=0){
  
 }
 
-function getDailyStats(index){
+/* function getDailyStats(index){
     let dailyObj = lastForecast.forecast.forecastday[index];
 
     // helper to get nice date
@@ -142,7 +135,7 @@ function getDailyStats(index){
         hiTempF,
         lowTempF,
     }
-}
+} */
 
 function getLatestWeatherObj(){
     return lastForecast;
@@ -153,5 +146,5 @@ export {
     getChanceOfRain, 
     getLatestWeatherObj,
     getHourlyStats,
-    getDailyStats,
+    /* getDailyStats, */
 };
